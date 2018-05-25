@@ -10,34 +10,22 @@ Either use the content directly by pointing at this repository
 https://raw.githubusercontent.com/openshift-labs/starter-guides/master/
 ```
 
-or host locally as static content, e.g. on OpenShift using the PHP S2I builder
-
-```
-$ oc new-app php~https://github.com/openshift-labs/starter-guides.git
-```
-
-and use that url to feed Workshopper with content.
-
-
 ## Create a full workshop
 
 You can follow this instructions to create a full workshop site:
 
 ```
-$ oc new-project labs
-$ oc new-app osevg/workshopper -e WORKSHOPS_URLS="https://raw.githubusercontent.com/openshift-labs/starter-guides/master/_workshops/training.yml" -e CONSOLE_ADDRESS=console.example.com:8443 -e ROUTER_ADDRESS=apps.example.com -e DOCS_URL=docs.openshift.org --name workshop -n labs
-$ oc expose service workshop --hostname workshop.apps.example.com -n labs
+$ oc new-project guides
+$ oc apply -f https://raw.githubusercontent.com/jorgemoralespou/java-starter-guides/master/guides-template.yaml
+$ oc new-app guides \
+             -p CONSOLE_ADDRESS=master.osevg.openshiftworkshop.com 
+             -p ROUTER_ADDRESS=apps.osevg.openshiftworkshop.com
 ```
 
 NOTE: You will need the following ENV values:
 
-* *WORKSHOPS_URLS*: Raw URL for a training. There's some trainings [here](https://github.com/openshift-labs/starter-guides/tree/master/_workshops)
-
-Depending on the workshop, you might need additional ENV. These are defined per workshop. In the sample use, we define:
 * *CONSOLE_ADDRESS*: Address to the master server's console
 * *ROUTER_ADDRESS*: Wildcard DNS used for deployed apps
-* *DOCS_URL*: Link to the OpenShift documentation
-
 
 # Run Guides Locally
 ```
@@ -46,6 +34,6 @@ $ cd starter-labs
 
 $ docker run -it --rm -p 8080:8080 -v $(pwd):/app-data \
               -e CONTENT_URL_PREFIX="file:///app-data" \
-              -e WORKSHOPS_URLS="file:///app-data/_workshops/roadshow.yml" \
+              -e WORKSHOPS_URLS="file:///app-data/_workshops/java-starter-guide.yml" \
               osevg/workshopper:latest 
 ```
