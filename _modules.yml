@@ -74,7 +74,7 @@ config:
       value: 1.0.0
 
 modules:
-  common_environment:
+  common-environment:
     name: Environment Overview
     vars:
       ENV_MASTERS:
@@ -82,7 +82,7 @@ modules:
       ENV_NODES:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
-  common_cli:
+  common-cli:
     name: Installing the *oc* client tool
     vars:
       DOWNLOAD_CLIENT_WINDOWS:
@@ -90,46 +90,46 @@ modules:
       DOWNLOAD_CLIENT_LIN32:
       DOWNLOAD_CLIENT_LIN64:
       OC_VERSION:
-  common_explore:
+  common-explore:
     name: Exploring the CLI and Web Console
     vars:
       CONSOLE_ADDRESS:
       USER_PASSWORD:
       DOCS_URL:
-  common_parksmap-architecture:
+  common-parksmap-architecture:
     name: Architecture Overview of the ParksMap Application
-  parksmap_docker:
+  parksmap-docker:
     name: Deploying our First Docker Image
     vars:
       CONSOLE_ADDRESS:
       DOCS_URL:
       PARKSMAP_IMAGENAME:
       PARKSMAP_VERSION:
-  parksmap_scaling:
+  parksmap-scaling:
     name: Scaling
     vars:
       DOCS_URL:
       PARKSMAP_VERSION:
-  parksmap_routes:
+  parksmap-routes:
     name: Creating Routes
     vars:
       PARKSMAP_VERSION:
-  parksmap_logging:
+  parksmap-logging:
     name: Exploring OpenShift's Logging Capabilities
     vars:
       ROUTER_ADDRESS:
-  parksmap_permissions:
+  parksmap-permissions:
     name: Role-Based Access Control
-  parksmap_rsh:
+  parksmap-rsh:
     name: Remote access
-  nationalparks_java:
+  nationalparks-java:
     name: Deploying Java Code
     vars:
       DOCS_URL:
       ROUTER_ADDRESS:
       NATIONALPARKS_VERSION:
       INFRA_PROJECT:
-  nationalparks_databases:
+  nationalparks-databases:
     name: Adding a Database (MongoDB)
     vars:
       ROUTER_ADDRESS:
@@ -140,7 +140,7 @@ modules:
 #    requires:
 #  #    - java
 #  #    - databases
-  nationalparks_application-health:
+  nationalparks-application-health:
     name: Application Health
     vars:
       DOCS_URL:
@@ -154,7 +154,7 @@ modules:
 #      - application-health
 #  codechanges:
 #    name: Using Source 2 Image for Code Changes
-  nationalparks_codechanges-gogs:
+  nationalparks-codechanges-gogs:
     name: Using Source 2 Image for Code Changes
     vars:
       INFRA_PROJECT:
@@ -165,23 +165,23 @@ modules:
 #    name: Canary Release to Production
 #    requires:
 #      - pipelines
-  mlbparks_templates:
+  mlbparks-templates:
     name: Using Application Templates
     vars:
       MLBPARKS_VERSION:
       INFRA_PROJECT:
-  mlbparks_clustering:
+  mlbparks-clustering:
     name: Clustering Stateful Java EE Applications
-  mlparks_binary-build:
+  mlbparks-binary-build:
     name: Binary Builds for Day to Day Development
     vars:
       DOCS_URL:
       ROUTER_ADDRESS:
-  parksmap_debugging:
+  mlbparks-debugging:
     name: Using Port-Forwarding and Remote Debugging
     vars:
       DOCS_URL:
-  common_further-resources:
+  common-further-resources:
     name: Further resources
 #  quotas:
 #    name: Limiting application resource usage

@@ -10,22 +10,22 @@ vars:
 
 modules:
   activate:
-  - common_environment
-  - common_cli
-  - common_explore
-  - common_parksmap-architecture
-  - parksmap_docker
-  - parksmap_scaling
-  - parksmap_routes
-  - parksmap_logging
-  - parksmap_permissions
-  - parksmap_rsh
-  - nationalparks_java
-  - nationalparks_databases
-  - nationalparks_application-health
-  - nationalparks_codechanges-gogs
-  - mlbparks_templates
-  - mlbparks_clustering
-  - mlparks_binary-build
-  - parksmap_debugging
-  - common_further-resources
+  - common-environment
+  - common-cli
+  - common-explore
+  - common-parksmap-architecture
+  - parksmap-docker
+  - parksmap-scaling
+  - parksmap-routes
+  - parksmap-logging
+  - parksmap-permissions
+  - parksmap-rsh
+  - nationalparks-java
+  - nationalparks-databases
+  - nationalparks-application-health
+  - nationalparks-codechanges-gogs
+  - mlbparks-templates
+  - mlbparks-clustering
+  - mlbparks-binary-build
+  - mlbparks-debugging
+  - common-further-resources
