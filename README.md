@@ -1,4 +1,4 @@
-# OpenShift Starter Workshop Guides [![Build Status](https://travis-ci.org/openshift-labs/starter-guides.svg?branch=master)](https://travis-ci.org/openshift-labs/starter-guides)
+# Developing Java applications on OpenShift - Starter Guides 
 
 Workshop content designed to be used by the [Workshopper tool](https://github.com/osevg/workshopper).
 
@@ -7,7 +7,7 @@ Workshop content designed to be used by the [Workshopper tool](https://github.co
 Either use the content directly by pointing at this repository
 
 ```
-https://raw.githubusercontent.com/openshift-labs/starter-guides/master/
+https://raw.githubusercontent.com/jorgemoralespou/starter-guides/master/
 ```
 
 ## Create a full workshop
@@ -17,7 +17,7 @@ You can follow this instructions to create a full workshop site:
 ```
 $ oc new-project guides
 $ oc apply -f https://raw.githubusercontent.com/jorgemoralespou/java-starter-guides/master/guides-template.yaml
-$ oc new-app guides \
+$ oc new-app guide \
              -p CONSOLE_ADDRESS=master.osevg.openshiftworkshop.com 
              -p ROUTER_ADDRESS=apps.osevg.openshiftworkshop.com
 ```
