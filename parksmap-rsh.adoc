@@ -1,4 +1,4 @@
-## Lab: Remote Operations
+## Lab: Access your pod remotely
 
 ### Background
 

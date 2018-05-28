@@ -16,18 +16,20 @@ OpenShift routing layer. And the data object behind that is a *Route*.
 The default OpenShift router (HAProxy) uses the HTTP header of the incoming
 request to determine where to proxy the connection. You can optionally define
 security, such as TLS, for the *Route*. If you want your *Services*, and, by
-extension, your *Pods*,  to be accessible to the outside world, you need to
+extension, your *Pods*, to be accessible from the outside world, you need to
 create a *Route*.
 
 #### Exercise: Creating a Route
 
-Fortunately, creating a *Route* is a pretty straight-forward process.  You simply
+Fortunately, creating a *Route* is a pretty straight-forward process. You simply
 `expose` the *Service* via the command line. Or, via the web console, just click
 the "Create Route" button associated with the service and choose the defaults as highlighted in the following image:
 
 image::create-route-39.png[Create Route,align="center"]
 
-First we want to verify that we don't already have any existing routes:
+#TODO: Add a screenshot and help on the route form.
+
+When using the command line, we can first verify that we don't already have any existing route:
 
 [source,bash]
 ----
@@ -58,7 +60,7 @@ Verify the *Route* was created with the following command:
 [source,bash]
 ----
 $ oc get route
-NAME       HOST/PORT                                              PATH      SERVICES   PORT       TERMINATION
+NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
 parksmap   parksmap-userXY.{{ROUTER_ADDRESS}}             parksmap   8080-tcp
 ----
 

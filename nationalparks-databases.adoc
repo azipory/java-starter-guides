@@ -65,7 +65,7 @@ admin password.
 
 image::mongo-template-deploy-37.png[MongoDB Deploy]
 
-NOTE: Make sure you name your database service name *mongodb-nationalparks*
+CAUTION: Make sure you name your database service name *mongodb-nationalparks*
 
 You can see that some of the fields say *"generated if empty"*. This is a
 feature of *Templates* in OpenShift. For
@@ -76,6 +76,7 @@ now, be sure to use the following values in their respective fields:
 * `MONGODB_DATABASE`: `mongodb`
 * `MONGODB_ADMIN_PASSWORD` : `mongodb`
 
+CAUTION: Make sure to have configured the *`MONGODB_DATABASE`* parameter with the appropriate value as by default it will already have a value of `simpledb`.
 
 Once you have entered in the above information, click on "Next" to go to the next step which will allow us to add a binding.
 
@@ -83,7 +84,7 @@ image::mongo-create-binding.png[Bind Mongo]
 
 This creates a *"secret"* in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
 
-While the database deploys, we will fix the labels assigned to the deployment. Currenly we can not set
+While the database deploys, we will fix the labels assigned to the deployment. Currenly we can `not` set
 a label when using templates from the Service Catalog, so in this case we will fix this manually.
 
 Like before, we will add 3 labels:
@@ -99,7 +100,9 @@ Execute the following command:
 $ oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
 ----
 
-Now that the connection and authentication information is bound to our project, we need to add it to the national parks backend.  Go to the project overview screen and click on the national parks deployment:
+#TODO: Change this with the inject to application button on the binding.
+
+Now that the connection and authentication information is bound to our project, we need to add it to the national parks backend. Go to the project overview screen and click on the national parks deployment:
 
 image::nationalparks-deployment.png[National Parks Deployment]
 

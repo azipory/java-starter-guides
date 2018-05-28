@@ -221,8 +221,8 @@ http://nationalparks-userXY.{{ROUTER_ADDRESS}}
 ----
 
 Since this is a back-end application, it doesn't actually have a web interface.
-However, it can still be used with a browser. All back ends that work with the parks map
-front end are required to implement a `/ws/info/` endpoint. To test, the
+However, it can still be used with a browser. All backends that work with the parksmap
+frontend are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
 
 CAUTION: In the following url(s), replace `userXY` with the project provided to you.

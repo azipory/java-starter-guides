@@ -6,9 +6,9 @@ The first thing we want to do to ensure that our `oc` command line tools was
 installed and successfully added to our path is to log in to the OpenShift
 environment that has been provided for this Workshop session.  In
 order to log in, we will use the `oc` command and then specify the server that we
-want to authenticate to.  Issue the following command:
+want to authenticate to. Issue the following command:
 
-[source,bash,role=copyandpaste]
+[source,bash,role=copypaste]
 ----
 oc login https://{{CONSOLE_ADDRESS}}
 ----
@@ -22,7 +22,7 @@ You can bypass the certificate check, but any data you send to the server could 
 Use insecure connections? (y/n):
 ----
 
-Enter in *Y* to use a potentially insecure connection.  The reason you received
+Enter in *Y* to use a potentially insecure connection. The reason you received
 this message is because we are using a self-signed certificate for this
 workshop, but we did not provide you with the CA certificate that was generated
 by OpenShift. In a real-world scenario, either OpenShift's certificate would be
@@ -42,7 +42,7 @@ oc login https://{{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
 ====
 
 Once you issue the `oc login` command, you will be prompted for the username and
-password combination for your user account.  Use the username and password combination provided to you by the instructor of this workshop:
+password combination for your user account. Use the username and password combination provided to you by the instructor of this workshop:
 
 [source,bash,role=copypaste]
 ----
@@ -75,7 +75,7 @@ obtain OAuth access tokens to authenticate themselves to the API. By default
 your authorization token will last for 24 hours. There is more information about
 the login command and its configuration in the https://{{DOCS_URL}}/cli_reference/get_started_cli.html#basic-setup-and-login[OpenShift Documentation].
 
-### Using a project
+##### Using a project
 
 Projects are a top level concept to help you organize your deployments. An
 OpenShift project allows a community of users (or a user) to organize and manage
@@ -105,7 +105,6 @@ You will see the following confirmation message:
 Now using project "userXY" on server "https://{{CONSOLE_ADDRESS}}".
 ----
 
-
 If you had multiple projects, the first thing you would want to do is to switch 
 to the *userXY* project to make sure you're on the correct project from now on. 
 You can do this with the following command:
@@ -132,7 +131,7 @@ works, open your browser and go to the following URL:
 
 *link:https://{{CONSOLE_ADDRESS}}[]*
 
-The first screen you will see is the authentication screen.  Enter in the following credentials:
+The first screen you will see is the authentication screen. You will be prompted for the username and password combination for your user account. Use the username and password combination provided to you by the instructor of this workshop:
 
 [source,bash]
 ----
@@ -143,7 +142,7 @@ Password: {{USER_PASSWORD}}
 image::ocp-login.png[OpenShift Login Screen]
 
 After you have authenticated to the web console, you will be presented with a
-list of items that you can add to your project.  This is called the service catalog. You will see
+list of items that you can add to your project. This is called the service catalog. You will see
 something that looks like the following image:
 
 image::explore-webconsole1sc.png[Web Console]

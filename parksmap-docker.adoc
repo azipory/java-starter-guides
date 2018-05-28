@@ -20,6 +20,8 @@ CAUTION: In the following url(s), replace `userXY` with the project provided to 
 Find your *userXY* project and click it. Next,
 click on the `Deploy Image` in the *"Add to Project"* drop down.  This will open a dialog that will allow you to specify the information for the image you want to deploy.
 
+#TODO: Show image of this drop down.
+
 There are several options, but we are only concerned with "Deploy Image". Click
 it. We will learn more about image streams and image stream tags later. For now,
 select the "Image Name" option, and copy/paste the following into the box:
@@ -64,15 +66,14 @@ Docker-formatted image that follows best practices, such as defining an EXPOSE
 port, not needing to run specifically as the *root user* or other user name, and
 a single non-exiting CMD to execute on start. 
 
-NOTE: Adding the labels is desired when deploying complex applications for organization purposes.
+NOTE: Providing appropriate labels is desired when deploying complex applications for organization purposes. OpenShift uses a label *app* to define and group components together in the Overview page. OpenShift will create this label with some default if the user don't provide it explicitly.
 
 ### Background: Containers and Pods
 
-Before we start digging in we need to understand how containers and *Pods* are
-related. We will not be covering the background on these technologies in this lab but if you have questions please inform the instructor.  Instead, we will dive right in and start using them.
+Before we start digging in, we need to understand how containers and *Pods* are
+related. We will not be covering the background on these technologies in this lab but if you have questions please inform the instructor. Instead, we will dive right in and start using them.
 
-In OpenShift, the smallest deployable unit is a *Pod*. A *Pod* is a group of one or
-more Docker containers deployed together and guaranteed to be on the same host.
+In OpenShift, the smallest deployable unit is a *Pod*. A *Pod* is a group of one or more OCI containers deployed together and guaranteed to be on the same host.
 From the official OpenShift documentation:
 
 [quote]
@@ -83,9 +84,8 @@ more labels, which are then used to select and manage groups of pods in a
 single operation.
 __
 
-*Pods* can contain multiple Docker instances. The general idea is for a Pod to
-contain a "server" and any auxiliary services you want to run along with that
-server. Examples of containers you might put in a *Pod* are, an Apache HTTPD
+*Pods* can contain multiple OCI containers. The general idea is for a Pod to
+contain a "main process" and any auxiliary services you want to run along with that process. Examples of containers you might put in a *Pod* are, an Apache HTTPD
 server, a log analyzer, and a file service to help manage uploaded files.
 
 ### Exercise: Examining the Pod
@@ -101,7 +101,7 @@ You can also get a list of all the pods created within your project, by navigati
 image::parksmap-podlist.png[Pod list]
 
 This *Pod* contains a single container, which
-happens to be the parks map application - a simple Spring Boot/Java application.
+happens to be the `parksmap` application - a simple Spring Boot/Java application.
 
 You can also examine *Pods* from the command line:
 
@@ -167,16 +167,15 @@ find the details page. You can also get there by clicking "Applications", then
 
 image::parksmap-pod.png[Pod list]
 
-Getting the parks map image running may take a little while to complete. Each
-OpenShift node that is asked to run the image has to pull (download) it if the
+Getting the parksmap image running may take a little while to complete. Each
+OpenShift node that is asked to run the image has to pull (download) it, if the
 node does not already have it cached locally. You can check on the status of the
 image download and deployment in the *Pod* details page, or from the command
 line with the `oc get pods` command that you used before.
 
-### Background: A Little About the Docker Daemon
+### Background: Customizing the image lifecycle behavior
 
-Whenever OpenShift asks the node's Docker daemon to run an image, the Docker
-daemon will check to make sure it has the right "version" of the image to run.
+Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Docker daemon or CRI-O) to run an image, the runtime will check to make sure it has the right "version" of the image to run.
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
@@ -187,9 +186,9 @@ https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy[image pull
 #### Background: Services
 
 *Services* provide a convenient abstraction layer inside OpenShift to find a
-group of like *Pods*. They also act as an internal proxy/load balancer between
+group of similar *Pods*. They also act as an internal proxy/load balancer between
 those *Pods* and anything else that needs to access them from inside the
-OpenShift environment. For example, if you needed more parks map servers to
+OpenShift environment. For example, if you needed more parksmap instances to
 handle the load, you could spin up more *Pods*. OpenShift automatically maps
 them as endpoints to the *Service*, and the incoming requests would not notice
 anything different except that the *Service* was now doing a better job handling
@@ -209,7 +208,7 @@ https://{{DOCS_URL}}/architecture/core_concepts/pods_and_services.html#services[
 including the YAML format to make one by hand, in the official documentation.
 
 Now that we understand the basics of what a *Service* is, let's take a look at
-the *Service* that was created for the image that we just deployed.  In order to
+the *Service* that was created for the image that we just deployed. In order to
 view the *Services* defined in your *Project*, enter in the following command:
 
 [source,bash]
@@ -282,7 +281,7 @@ Alternatively, you can use the web console to view information about the *Servic
 image::parksmap-service.png[Service]
 
 It is also of interest to view the YAML of the *Pod* to understand how OpenShift
-wires components together.  For example, run the following command to get the
+wires components together. For example, run the following command to get the
 name of your `parksmap` *Pod*:
 
 [source,bash]
@@ -352,7 +351,7 @@ Session Affinity:       None
 No events.
 ----
 
-You may be wondering why only one end point is listed. That is because there is
+You may be wondering why only one endpoint is listed. That is because there is
 only one *Pod* currently running.  In the next lab, we will learn how to scale
 an application, at which point you will be able to see multiple endpoints
 associated with the *Service*.

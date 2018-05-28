@@ -82,6 +82,8 @@ modules:
       ENV_NODES:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
+  common-parksmap-architecture:
+    name: Architecture Overview of the ParksMap Application
   common-cli:
     name: Installing the *oc* client tool
     vars:
@@ -96,8 +98,6 @@ modules:
       CONSOLE_ADDRESS:
       USER_PASSWORD:
       DOCS_URL:
-  common-parksmap-architecture:
-    name: Architecture Overview of the ParksMap Application
   parksmap-docker:
     name: Deploying our First Docker Image
     vars:

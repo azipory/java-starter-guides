@@ -198,9 +198,11 @@ it, always ensuring that the desired number of replicas was in place.
 
 More information on probing applications is available in the
 https://{{DOCS_URL}}/dev_guide/application_health.html[Application
-Health] section of the documentation.
+Health] section of the documentation and later in this guide.
 
 ### Exercise: Scale Down
 
 Before we continue, go ahead and scale your application down to a single
 instance. Feel free to do this using whatever method you like.
+
+WARNING: Don't forget to scale down back to 1 instance your `parksmap` component as otherwise you might experience some weird behavior in later labs. This is due to how the application has been coded and not to OpenShift itself.

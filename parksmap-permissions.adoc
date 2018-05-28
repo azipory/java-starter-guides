@@ -3,17 +3,15 @@
 ### Background
 
 Almost every interaction with an OpenShift environment that you can think of
-requires going through the master's API. All API interactions are both
-authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to
-do what you are asking?).
+requires going through the OpenShift's control plane API. All API interactions are both authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to do what you are asking?).
 
-{% if modules.logging %}In the log aggregation lab we saw that there was an
-error in reference to a *Service Account*.{% endif %}Just like a user has
-permissions (AuthZ), sometimes we may wish for non-users to be able to perform
-actions against the API. These "non-users" are referred to as service accounts.
+In the log aggregation lab we saw that there was an
+error in reference to a *Service Account*.
+
+As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he issues a command). These actions are performed using a *Service Account* which is a special type of `user` that the platform will use internally.
 
 OpenShift automatically creates a few special service accounts in every project.
-The **default** service account has its credentials automatically injected into
+The **default** service account is the one tkaing the responsibility of running the pods, and OpenShift uses and injects this service account into
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
@@ -57,9 +55,7 @@ The `-z` flag will only work for service accounts in the *current* project.
 If you're referring to a service account in a different project, use the `-n <project>`switch.
 ====
 
-Now that the default *Service Account* has **view** access, it can query the API
-to see what resources are within the *Project*. This also has the added benefit
-of suppressing the error message! Although, in reality, we fixed the application.
+Now that the `default` *Service Account* now has **view** access, so now it can query the API to see what resources are within the *Project*. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.
 
 Another way you could have done the same is by using the OpenShift console. Once you're on the 
 *"Resources --> Membership"* page, click on Service Accounts, and then on *"Edit Membership"* button.
@@ -74,23 +70,6 @@ image::membership_serviceaccount-edit.png[Service account edit]
 Once you're finished editing permissions, click on the *"Done Editing"* button.
 
 image::membership_serviceaccount-done.png[Service account changed]
-
-### Exercise: Grant User View Permissions
-If you create a project, you are that project's administrator. This means that
-you can grant access to other users, too. If you like, give your neighbor view
-access to your project using the following command:
-
-CAUTION: In the following url(s), replace `userXY` with the user provided to you.
-
-[source,bash,role=copypaste]
-----
-$ oc policy add-role-to-user view userXY
-----
-
-Have them go to the project view by clicking the *Projects* button and verify
-that they can see your project and its resources. This type of arrangement (view
-but not edit) might be ideal for a developer getting visibility into a
-production application's project.
 
 ### Exercise: Redeploy Application
 One more step is required. We need to re-deploy the parks map application because it's
@@ -115,3 +94,20 @@ deployments.
 image::new-parksmap-deployed.png[Application deployed]
 
 If you look at the logs for the application now, you should see no errors.  That's great.
+
+### Exercise: Grant User View Permissions
+If you create a project, you are that project's administrator. This means that
+you can grant access to other users, too. If you like, give your neighbor view
+access to your project using the following command:
+
+CAUTION: In the following url(s), replace `userXY` with the user provided to you.
+
+[source,bash,role=copypaste]
+----
+$ oc policy add-role-to-user view userXY
+----
+
+Have them go to the project view by clicking the *Projects* button and verify
+that they can see your project and its resources. This type of arrangement (view
+but not edit) might be ideal for a developer getting visibility into a
+production application's project.
