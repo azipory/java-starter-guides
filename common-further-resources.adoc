@@ -18,6 +18,8 @@ through various scenarios related to using OpenShift.
 The online interactive learning environment is always available so you
 can continue to work on those exercises even after the workshop is over.
 
+* *link:http://cookbook.openshift.org/[OpenShift Cookbook]* - Recipes of common tasks that users could need to do on OpenShift.
+
 Below you will find further resources for learning about OpenShift and
 running OpenShift on your own computer, as well as details about OpenShift
 Online or other OpenShift related products and services.
@@ -50,8 +52,12 @@ OpenShift.
 * *link:https://www.openshift.com/promotions/for-developers.html[OpenShift
 for Developers]*
 
-image::openshift-for-developers.png[OpenShift for Developers]
+image::further-resources-openshift-for-developers.png[OpenShift for Developers]
 
 * *link:https://www.openshift.com/promotions/devops-with-openshift.html[DevOps with OpenShift]*
 
-image::devops-with-openshift.png[DevOps with OpenShift]
+image::further-resources-devops-with-openshift.png[DevOps with OpenShift]
+
+* *link:https://www.openshift.com/deploying-to-openshift/[Deploying with OpenShift]*
+
+image::further-resources-deploying-to-openshift.png[Deploying to OpenShift]

@@ -17,7 +17,7 @@ account, we can do interesting things.
 
 You can view current permissions in the web UI, by navigating to "Resources -> Membership" page.
 
-image::membership.png[Membership]
+image::parksmap-permissions-membership.png[Membership]
 
 ### Exercise: Grant Service Account View Permissions
 The parksmap application wants to talk to the OpenShift API to learn about other
@@ -60,16 +60,16 @@ Now that the `default` *Service Account* now has **view** access, so now it can 
 Another way you could have done the same is by using the OpenShift console. Once you're on the 
 *"Resources --> Membership"* page, click on Service Accounts, and then on *"Edit Membership"* button.
 
-image::membership_serviceaccount-list.png[Service account list]
+image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 
 Add the admin role to the *userXY/default* Service Account, and then
 click the *"Add"* button.
 
-image::membership_serviceaccount-edit.png[Service account edit]
+image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
 
 Once you're finished editing permissions, click on the *"Done Editing"* button.
 
-image::membership_serviceaccount-done.png[Service account changed]
+image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 
 ### Exercise: Redeploy Application
 One more step is required. We need to re-deploy the parks map application because it's
@@ -85,13 +85,13 @@ cause a new deployment (which you know creates a new *ReplicationController*, ri
 
 Click it.
 
-image::new-parksmap-deploy.png[Deploy Button]
+image::parksmap-permissions-redeploy.png[Deploy Button]
 
 You'll see that a new deployment is immediately started. Return to the overview
 page and watch it happen. You might not be fast enough! But it will be in the list of
 deployments.
 
-image::new-parksmap-deployed.png[Application deployed]
+image::parksmap-permissions-redeployed.png[Application deployed]
 
 If you look at the logs for the application now, you should see no errors.  That's great.
 

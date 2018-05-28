@@ -88,17 +88,17 @@ CAUTION: In the following url(s), replace `userXY` with the project provided to 
 In the OpenShift web console, find your `userXY` project, and then
 click the *"Add to Project"* button and then the browse catalog link as highlighted in the following image:
 
-image::java-add-to-project.png[Add to Project]
+image::nationalparks-java-show-catalog.png[Add to Project]
 
 This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
 
 Search for `openjdk`, and finally "Red Hat OpenJDK" as shown in the following image:
 
-image::service-catalog-languages.png[Service Catalog Languages]
+image::nationalparks-java-sarch-jdk.png[Service Catalog Languages]
 
 After you click `Red Hat OpenJDK 8`, a dialog is presented as shown in the following image:
 
-image::service-catalog-add-java.png[Add Java]
+image::nationalparks-java-new-java-service.png[Add Java]
 
 Click on the "Next" button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
@@ -121,7 +121,7 @@ If you were to specify a specific branch or directory in the repository for your
 
 Don't click *Create*, but click on *Advanced Options*, as there's more things we are going to configure.
 
-image::service-catalog-java-advanced.png[Runtimes]
+image::nationalparks-java-configure-java-service.png[Runtimes]
 
 [TIP]
 ====
@@ -131,7 +131,7 @@ scroll down to *Build Configuration* and add an environment variable named
 *MAVEN_MIRROR_URL* with value
 `http://nexus.{{INFRA_PROJECT}}.svc.cluster.local:8081/content/groups/public`
 
-image::new-national-parks-2.png[Runtimes]
+image::nationalparks-java-configure-java-service-maven2.png[Runtimes]
 ====
 
 We will again set 3 labels to the deployment.
@@ -140,12 +140,12 @@ We will again set 3 labels to the deployment.
 - *__component__=nationalparks*  (the name of this deployment)
 - *__role__=backend* (the role this component plays in the overall application)
 
-image::new-national-parks-labels.png[Adding labels]
+image::nationalparks-java-configure-java-service-labels.png[Adding labels]
 
 You can then hit the button labeled *"Create"*. Then click *Continue to
 overview*. You will see the build log output directly there.
 
-image::new-national-parks-overview-build.png[Nationalparks build]
+image::nationalparks-java-new-java-service.png[Nationalparks build]
 
 
 This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build

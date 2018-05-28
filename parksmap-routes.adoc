@@ -25,9 +25,11 @@ Fortunately, creating a *Route* is a pretty straight-forward process. You simply
 `expose` the *Service* via the command line. Or, via the web console, just click
 the "Create Route" button associated with the service and choose the defaults as highlighted in the following image:
 
-image::create-route-39.png[Create Route,align="center"]
+image::parksmap-route-create.png[Create Route,align="center"]
 
-#TODO: Add a screenshot and help on the route form.
+When creating a route, some options can be provided, like the hostname for the route or the TLS configuration for the Route.
+
+image::parksmap-route-editor.png[Create Route editor,align="center"]
 
 When using the command line, we can first verify that we don't already have any existing route:
 
@@ -66,9 +68,9 @@ parksmap   parksmap-userXY.{{ROUTER_ADDRESS}}             parksmap   8080-tcp
 
 You can also verify the *Route* by looking at the project in the OpenShift web console:
 
-image::parksmap-route-39.png[Route]
+image::parksmap-route-created.png[Route created]
 
 Pretty nifty, huh?  This application is now available at the URL shown in the
 web console. Click the link and you will see:
 
-image::parksmap-empty.png[Route]
+image::parksmap-route-empty-map.png[Empty map]

@@ -64,11 +64,11 @@ The OpenShift Web Console also provides a convenient way to access a terminal se
 
 In order to access a pods terminal via the Web Console, click on "Applications", then "Pods" and finally the pod name as shown in the following image:
 
-image::applications-pods.png[Pod List]
+image::parksmap-rsh-applications-pods.png[Pod List]
 
 Once you are viewing the information for the selected pod, click on the "Terminal" tab to open up a shell session.
 
-image::applications-pods-terminal.png[Pod List]
+image::parksmap-rsh-applications-pods-terminal.png[Pod List]
 
 
 Pretty nifty!  Go ahead and execute the same commands you did when using the CLI to see how the Web Console based terminal behaves.

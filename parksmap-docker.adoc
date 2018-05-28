@@ -33,7 +33,7 @@ docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 
 Your screen will end up looking something like this:
 
-image::parksmap-image37.png[Explore Project]
+image::parksmap-image.png[Explore Project]
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
 out to the Docker registry specified and interrogate the image. You then are
@@ -42,7 +42,7 @@ and etc. -- which we will learn about later.
 
 Make sure to have the correct application name:
 
-image::parksmap-image-options-37.png[Explore Project]
+image::parksmap-image-options.png[Explore Project]
 
 Let's scroll to the bottom of this page and add some labels to better identify 
 this deployment later. Labels will help us identify and filter components in the
@@ -54,7 +54,7 @@ We will add 3 labels:
 - *__component__=parksmap*  (the name of this deployment)
 - *__role__=frontend* (the role this component plays in the overall application)
 
-image::parksmap-image-options-37-labels.png[Explore Project]
+image::parksmap-image-options-labels.png[Explore Project]
 
 Hit the blue "Deploy" button at the bottom of the dialog and then click the
 "Continue to overview" link or the "Close" button. Take a moment to look at the various messages that

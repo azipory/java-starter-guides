@@ -47,14 +47,14 @@ persistent storage!). The image will ensure that:
 In the web console in your `userXY` project,
 click the *"Add to Project"* button and then *"Browse Catalog"*. Select the *"Databases"* category and then *"Mongo"*.
 
-image::mongodb-datastores-39.png[Data Stores]
+image::nationalparks-databases-catalog-databases.png[Data Stores]
 
 Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, scroll down to find the *MongoDB
 (Ephemeral)* template, and select it.  You will notice that there are several
 MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
 template is what you should choose.  Go ahead and select the ephemeral template and click the next button.
 
-image::ocp-mongodb-template-39.png[MongoDB]
+image::nationalparks-databases-catalog-databases-mongodb.png[MongoDB]
 
 When we performed the application build, there was no template. Rather, we selected the
 builder image directly and OpenShift presented only the standard build workflow.
@@ -63,7 +63,7 @@ parameters that can be customized. In our case, the parameters we are concerned
 with are -- user, password, database, and
 admin password.
 
-image::mongo-template-deploy-37.png[MongoDB Deploy]
+image::nationalparks-databases-catalog-databases-mongodb-config.png[MongoDB Deploy]
 
 CAUTION: Make sure you name your database service name *mongodb-nationalparks*
 
@@ -80,9 +80,9 @@ CAUTION: Make sure to have configured the *`MONGODB_DATABASE`* parameter with th
 
 Once you have entered in the above information, click on "Next" to go to the next step which will allow us to add a binding.
 
-image::mongo-create-binding.png[Bind Mongo]
+image::nationalparks-databases-catalog-databases-mongodb-create-bining.png[Bind Mongo]
 
-This creates a *"secret"* in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
+This creates a *"binding"* (as a secret) in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
 
 While the database deploys, we will fix the labels assigned to the deployment. Currenly we can `not` set
 a label when using templates from the Service Catalog, so in this case we will fix this manually.
@@ -100,19 +100,19 @@ Execute the following command:
 $ oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
 ----
 
-#TODO: Change this with the inject to application button on the binding.
+Now that the connection and authentication information is in a binding in our project, we need to add it to the nationalparks backend. 
 
-Now that the connection and authentication information is bound to our project, we need to add it to the national parks backend. Go to the project overview screen and click on the national parks deployment:
+image::nationalparks-databases-binding-view-secret.png[National Parks Binding]
 
-image::nationalparks-deployment.png[National Parks Deployment]
+This will bring us to the binding information. Click `reveal` next to the word `Opaque` in the screen.
 
-This will bring up the configuration for the deployment of the national parks backend.  If you think way back to the beginning of the labs, you will recall that a
-*DeploymentConfiguration* tells OpenShift how to deploy something.
+image::nationalparks-databases-binding-add-binding-to-app.png[Add binding to application]
 
-In order to make the authentication information available to the java code, we need to add the secret as part of the deployment by modifying the environment information.  To do this, click on *"Environment"* and then select the monogo-ephemeral-podid-credentials and click on the *"Save"* Button.
+Select `nationalparks` application and click `Save`.
 
-image::ocp-mongo-nationalparks-bind.png[Edit Configuration]
+image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add binding to application]
 
+This change in configuration will trigger a new deployment of the `nationalparks` application with the binding properly injected.
 
 #### Exercise: Exploring OpenShift Magic
 As soon as we changed the *DeploymentConfiguration*, some
@@ -290,6 +290,6 @@ CAUTION: In the following url(s), replace `userXY` with the project provided to 
 http://parksmap-userXY.{{ROUTER_ADDRESS}}/
 ----
 
-image::parksmap-new-parks.png[MongoDB]
+image::nationalparks-databases-new-parks.png[MongoDB]
 
 You'll notice that the parks suddenly are showing up. That's really cool!
