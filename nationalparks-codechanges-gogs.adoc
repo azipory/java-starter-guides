@@ -10,6 +10,12 @@ hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
 #### Exercise: Configuring Gogs Web Hooks
+In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `userXY` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
+
+On this screen you will see the option to copy the generic webhook URL as shown in the following image:
+
+image::nationalparks-codechanges-webhook-config.png[Webhook]
+
 Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on your local Gogs:
 
