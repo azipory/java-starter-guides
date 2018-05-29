@@ -60,12 +60,6 @@ config:
     - name: PARKSMAP_VERSION
       desc: Version of parksmap to use
       value: "1.2.0"
-    ##
-    # Module Java
-    # 
-    - name: NATIONALPARKS_VERSION
-      desc: Version of nationalparks to use
-      value: master
 
 modules:
   common-environment:
@@ -121,13 +115,11 @@ modules:
     vars:
       DOCS_URL:
       ROUTER_ADDRESS:
-      NATIONALPARKS_VERSION:
       INFRA_PROJECT:
   nationalparks-databases:
     name: Adding a Database (MongoDB)
     vars:
       ROUTER_ADDRESS:
-      NATIONALPARKS_VERSION:
       PARKSMAP_VERSION:
 #  configmap:
 #    name: Externalizing Application Configurations
@@ -153,7 +145,6 @@ modules:
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
-      NATIONALPARKS_VERSION:
       PARKSMAP_VERSION:
 #  canaryrelease:
 #    name: Canary Release to Production
