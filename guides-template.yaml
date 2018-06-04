@@ -16,7 +16,7 @@ parameters:
   displayName: Workshop Url
   required: true
 - name: CONSOLE_ADDRESS
-  description: Console url (e.g. master.mycluster.openshiftworkshop.com or console.mycluster.gce.pixy.io:8443)
+  description: Console url (e.g. https://master.mycluster.openshiftworkshop.com or https://console.mycluster.gce.pixy.io:8443)
   value:
   displayName: Console url
   required: true

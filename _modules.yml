@@ -5,7 +5,7 @@ config:
     # 
     - name: CONSOLE_ADDRESS
       desc: Address to access the OpenShift console
-      value: master.osevg.openshiftworkshop.com
+      value: https://master.osevg.openshiftworkshop.com
     - name: ROUTER_ADDRESS
       desc: Router DNS suffix (https://appname-project.<suffix>)
       value: "apps.osevg.openshiftworkshop.com"

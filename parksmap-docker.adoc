@@ -13,7 +13,7 @@ With OpenShift it can be done directly from the web console.
 
 Return to the web console:
 
-*link:https://{{CONSOLE_ADDRESS}}[]*
+*link:{{CONSOLE_ADDRESS}}[]*
 
 CAUTION: In the following url(s), replace `userXY` with the project provided to you.
 

@@ -10,7 +10,7 @@ want to authenticate to. Issue the following command:
 
 [source,bash,role=copypaste]
 ----
-oc login https://{{CONSOLE_ADDRESS}}
+oc login {{CONSOLE_ADDRESS}}
 ----
 
 You may see the following output:
@@ -37,7 +37,7 @@ the following command:
 
 [source,bash]
 ----
-oc login https://{{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
+oc login {{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
 ----
 ====
 
@@ -102,7 +102,7 @@ You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "userXY" on server "https://{{CONSOLE_ADDRESS}}".
+Now using project "userXY" on server "{{CONSOLE_ADDRESS}}".
 ----
 
 If you had multiple projects, the first thing you would want to do is to switch 
@@ -120,7 +120,7 @@ You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "userXY" on server "https://{{CONSOLE_ADDRESS}}".
+Now using project "userXY" on server "{{CONSOLE_ADDRESS}}".
 ----
 
 ### The Web Console
@@ -129,7 +129,7 @@ OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser.  To get a feel for how the web console
 works, open your browser and go to the following URL:
 
-*link:https://{{CONSOLE_ADDRESS}}[]*
+*link:{{CONSOLE_ADDRESS}}[]*
 
 The first screen you will see is the authentication screen. You will be prompted for the username and password combination for your user account. Use the username and password combination provided to you by the instructor of this workshop:
 

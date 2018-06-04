@@ -18,8 +18,8 @@ You can follow this instructions to create a full workshop site:
 $ oc new-project guides
 $ oc apply -f https://raw.githubusercontent.com/jorgemoralespou/java-starter-guides/master/guides-template.yaml
 $ oc new-app guide \
-             -p CONSOLE_ADDRESS=master.osevg.openshiftworkshop.com 
-             -p ROUTER_ADDRESS=apps.osevg.openshiftworkshop.com
+             -p CONSOLE_ADDRESS="https://master.osevg.openshiftworkshop.com"
+             -p ROUTER_ADDRESS="apps.osevg.openshiftworkshop.com"
 ```
 
 NOTE: You will need the following ENV values:
