@@ -1,0 +1,31 @@
+---
+- name: login as super user with token
+  shell: "oc login --token={{ openshift_token }} --insecure-skip-tls-verify=true"
+  when:
+    - openshift_token is defined
+    - openshift_token is not none
+    - openshift_token|trim() != ""
+
+- name: login as super user with pwd
+  shell: "oc login -u {{ openshift_user }} -p {{ openshift_password }} --insecure-skip-tls-verify=true"
+  when: >
+    openshift_token is not defined or
+    openshift_token is none or
+    openshift_token|trim() == ""
+
+- name: Get apps route suffix
+  block:
+    - openshift_v1_route:
+        name: dummy
+        namespace: "{{ namespace }}"
+        state: present
+        spec_to_kind: Service
+        spec_to_name: dummy
+        spec_port_target_port: 8080
+      register: dummy_route
+    - set_fact:
+        apps_hostname_suffix: "{{ dummy_route.route.spec.host|regex_replace('^dummy-' + namespace + '\\.(.*)$', '\\1') }}"
+    - openshift_v1_route:
+        name: dummy
+        namespace: "{{ namespace }}"
+        state: absent

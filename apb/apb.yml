@@ -1,0 +1,87 @@
+version: 1.0
+name: starter-workshop-apb
+description: APB to deploy required infra components for the Developer Starter Workshop on an OpenShift cluster
+bindable: False
+async: optional
+tags:
+- workshop
+metadata:
+  dependencies: ['docker.io/osevg/workshopper:latest','docker.io/openshiftdemos/gogs:0.11.34','quay.io/wkulhanek/etherpad:1.6.5','docker.io/sonatype/nexus3:3.11.0']
+  displayName: "OpenShift Developer Starter Workshop Installer"
+  longDescription: |-
+    Installs the lab instructions and required components
+    - Gogs server
+    - Nexus
+    - Etherpad
+    - Lab Guides
+    - Eclipse Che
+    for running the Getting starter developing on OpenShift Workshop https://github.com/openshift-labs/starter-guides
+  console.openshift.io/iconClass: "pficon pficon-process-automation"
+  providerDisplayName: "Red Hat, Inc."
+plans:
+  - name: default
+    description: Deploys OpenShift Starter Workshop Infrastructure
+    free: True
+    metadata:
+      displayName: Default
+    parameters:
+    - name: openshift_user
+      title: Username
+      description: User is required for creating project admin resources
+      type: string
+      required: true
+      display_type: text
+      display_group: OpenShift User
+    - name: openshift_password
+      title: Password
+      description: Password is required for creating project admin resources
+      type: string
+      required: true
+      display_type: password
+      display_group: OpenShift User
+    - name: workshop_type
+      title: Workshop type
+      description: Type of workshop to deliver (Java, Python, node.js)
+      type: enum
+      enum: ['java', 'python', 'node.js', 'php']
+      required: true
+      display_type: select
+      default: java
+      display_group: Workshop
+    - name: user_count
+      title: Number of participants
+      description: Number of participants for the workshop. There will be provisioned infrastructure/project for each participant
+      type: number
+      required: true
+      display_group: Workshop
+    - name: openshift_user_password
+      title: OpenShift User Password
+      description: The OpenShift password for participants to be displayed in the lab guide to participants
+      type: string
+      required: true
+      display_type: text
+      default: "r3dh4t1!"
+      display_group: Workshop
+    - name: openshift_master_url
+      title: OpenShift Master URL
+      description: The address to OpenShift master URL to be displayed in the lab guide to participants
+      type: string
+      required: true
+      display_type: text
+      display_group: Lab Guide
+    - name: gogs_adm_user
+      title: Gogs Admin User
+      description: Admin user for Gogs Git Server
+      type: string
+      default: "gogsadmin"
+      required: true
+      display_type: text
+      display_group: Git Server
+    - name: gogs_adm_password
+      title: Gogs Admin Password
+      description: Admin password for Gogs Git Server
+      type: string
+      default: "r3dh4t1!"
+      required: true
+      display_type: text
+      display_group: Git Server

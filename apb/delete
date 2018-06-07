@@ -1,0 +1,2 @@
+oc delete all -l run=starter-provision
+oc delete all -l run=starter-deprovision

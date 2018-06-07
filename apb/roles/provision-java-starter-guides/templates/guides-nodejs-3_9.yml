@@ -43,7 +43,7 @@ objects:
     workshop.yml: |+
       ---
       id: workshop
-      name: Developing Java Applications on OpenShift - Starter Lab
+      name: Developing Node.js Applications on OpenShift - Starter Lab
 
       content:
         url: ${CONTENT_URL_PREFIX}
@@ -51,6 +51,9 @@ objects:
       vars:
         CONSOLE_ADDRESS: ${CONSOLE_ADDRESS}
         ROUTER_ADDRESS: ${ROUTER_ADDRESS}
+        INFRA_PROJECT: {{ namespace }}
+        NUM_USERS: {{ user_count }}
+        USER_PASSWORD: {{ openshift_user_password }}
 
 
       modules:

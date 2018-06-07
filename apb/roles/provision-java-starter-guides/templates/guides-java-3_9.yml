@@ -51,6 +51,9 @@ objects:
       vars:
         CONSOLE_ADDRESS: ${CONSOLE_ADDRESS}
         ROUTER_ADDRESS: ${ROUTER_ADDRESS}
+        INFRA_PROJECT: {{ namespace }}
+        NUM_USERS: {{ user_count }}
+        USER_PASSWORD: {{ openshift_user_password }}
 
 
       modules:

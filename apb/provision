@@ -1,0 +1,17 @@
+# oc new-project demo
+# oc create serviceaccount apb
+# oc create rolebinding apb --clusterrole=admin --serviceaccount=demo:apb
+oc run starter-provision \
+       --env="POD_NAME=starter-provision" \
+       --env="POD_NAMESPACE=demo" \
+       --image=$(oc get images | grep starter-workshop-apb | awk '{print $2}') \
+       --restart=Never \
+       --attach=true \
+       --serviceaccount=apb  \
+       -- provision -e namespace=demo \
+                    -e cluster=openshift \
+                    -e openshift_user=admin \
+                    -e openshift_password=password \
+                    -e openshift_master_url=10.5.5.5 \
+                    -e user_count_start=1 \
+                    -e user_count=5

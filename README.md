@@ -37,3 +37,15 @@ $ docker run -it --rm -p 8080:8080 -v $(pwd):/app-data \
               -e WORKSHOPS_URLS="file:///app-data/_workshops/java-starter-guides.yml" \
               osevg/workshopper:latest 
 ```
+
+Using Edge version of workshopper:
+```
+$ git clone https://github.com/openshift-labs/starter-labs.git
+$ cd starter-labs
+
+$ docker run -it --rm -p 8080:8080 -v $(pwd):/app-data \
+              -e CONTENT_URL_PREFIX="file:///app-data" \
+              -e WORKSHOPS_URLS="file:///app-data/_workshops/java-starter-guides.yml" \
+              -e LOG_TO_STDOUT=true \
+              osevg/workshopper:edge
+```
