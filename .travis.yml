@@ -7,7 +7,7 @@ services:
   - docker
 
 env:
-  - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:$PWD/roles
+  - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:$PWD/apb/roles
 
 before_install:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
