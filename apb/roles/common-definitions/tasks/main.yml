@@ -13,6 +13,16 @@
     openshift_token is none or
     openshift_token|trim() == ""
 
+- name: Verify user can create projects
+  command: oc auth can-i create project
+  register: canicreateprojects
+  failed_when: canicreateprojects.stdout != 'yes'
+
+- name: Verify user can delete projects
+  command: oc auth can-i delete project
+  register: canideleteprojects
+  failed_when: canideleteprojects.stdout != 'yes'
+
 - name: Get apps route suffix
   block:
     - openshift_v1_route:

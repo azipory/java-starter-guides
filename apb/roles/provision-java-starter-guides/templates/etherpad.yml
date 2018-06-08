@@ -114,7 +114,7 @@ objects:
                         },
 
         //the default text of a pad
-        "defaultPadText" : "Welcome to our OpenShift Workshop!!!\\n\\n",
+        "defaultPadText" : "{{etherpad_text}}",
 
         /* Default Pad behavior, users can override by changing */
         "padOptions": {
