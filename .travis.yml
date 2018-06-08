@@ -7,7 +7,7 @@ services:
   - docker
 
 env:
-  - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:$PWD/apb/roles
+- ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:$PWD/apb/roles
 
 before_install:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -15,15 +15,10 @@ before_install:
 install:
   - pip install ansible
   - ansible-galaxy install -r apb/requirements-travis.yml
+  - ansible-playbook apb/playbooks/provision.yml --syntax-check
 
 script:
-  - cd apb
-  - |
-    for PLAYBOOK in playbooks/{provision,deprovision,bind,unbind,test}.yml
-    do ansible-playbook $PLAYBOOK --syntax-check
-    done
-  - yamllint apb.yml
-  - docker build -t openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT .
+  - cd apb && docker build -t openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT .
 
 after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
