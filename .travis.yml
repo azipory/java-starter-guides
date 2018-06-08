@@ -21,8 +21,8 @@ script:
   - cd apb && docker build -t openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT .
 
 after_success:
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - echo "Branch=$TRAVIS_BRANCH"
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then export TAG="latest"; else export TAG=$TRAVIS_BRANCH ; fi
+  - echo "Branch=$TRAVIS_BRANCH Tag=$TAG"
   - docker tag openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT openshiftapb/starter-workshop-apb:$TAG
   - echo "Pushing image to Docker hub: openshiftapb/starter-workshop-apb:$TAG"
   - docker push openshiftapb/starter-workshop-apb:$TAG
