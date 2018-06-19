@@ -132,6 +132,28 @@
     - workshop_type == "java"
 
 #####
+# ocp-ops-view
+#####
+- name: "Copy ocp-ops-view resource list"
+  copy:
+    src: ocp-ops-view.yml
+    dest: "{{ tmp_dir.path }}/ocp-ops-view.yml"
+
+- name: Configure SA kube-ops-view in {{ namespace }}
+  command: "oc create sa kube-ops-view -n {{ namespace }}"
+
+- name: Add anyuid to SA kube-ops-view in {{ namespace }}
+  command: "oc adm policy add-scc-to-user anyuid -z kube-ops-view -n {{ namespace }}"
+
+- name: Add cluster-admin role to SA kube-ops-view in {{ namespace }}
+  command: "oc adm policy add-cluster-role-to-user cluster-admin -z kube-ops-view -n {{ namespace }}"
+
+- name: Configure SA kube-ops-view in {{ namespace }}
+  command: "oc apply -f ocp-ops-view.yml -n {{ namespace }}"
+  args:
+    chdir: "{{ tmp_dir.path }}"  
+
+#####
 # Eclipse che
 #####
 # # deploy eclipse che
