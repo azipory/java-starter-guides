@@ -111,8 +111,8 @@
     project_name: "{{ namespace }}"
     gogs_route: "{{ gogs_hostname }}"
     gogs_image_version: 0.11.34
-    gogs_admin_user: "{{ gogs_adm_user }}"
-    gogs_admin_password: "{{ gogs_adm_password }}"
+    gogs_admin_user: "{{ infrasvcs_adm_user }}"
+    gogs_admin_password: "{{ infrasvcs_adm_password }}"
     gogs_user: "developer"
     gogs_password: "{{ openshift_user_password }}"
     gogs_generate_user_count: "{{ user_count }}"
@@ -139,16 +139,13 @@
     src: ocp-ops-view.yml
     dest: "{{ tmp_dir.path }}/ocp-ops-view.yml"
 
-- name: Configure SA kube-ops-view in {{ namespace }}
-  command: "oc create sa kube-ops-view -n {{ namespace }}"
+- name: Add anyuid to SA ocp-ops-view in {{ namespace }}
+  command: "oc adm policy add-scc-to-user anyuid -z ocp-ops-view -n {{ namespace }}"
 
-- name: Add anyuid to SA kube-ops-view in {{ namespace }}
-  command: "oc adm policy add-scc-to-user anyuid -z kube-ops-view -n {{ namespace }}"
+- name: Add cluster-admin role to SA ocp-ops-view in {{ namespace }}
+  command: "oc adm policy add-cluster-role-to-user cluster-admin -z ocp-ops-view -n {{ namespace }}"
 
-- name: Add cluster-admin role to SA kube-ops-view in {{ namespace }}
-  command: "oc adm policy add-cluster-role-to-user cluster-admin -z kube-ops-view -n {{ namespace }}"
-
-- name: Configure SA kube-ops-view in {{ namespace }}
+- name: Configure SA ocp-ops-view in {{ namespace }}
   command: "oc apply -f ocp-ops-view.yml -n {{ namespace }}"
   args:
     chdir: "{{ tmp_dir.path }}"  
@@ -156,17 +153,17 @@
 #####
 # Eclipse che
 #####
-# # deploy eclipse che
-# - import_role:
-#     name: openshift_eclipse_che
-#   vars:
-#     project_name: "{{ namespace }}"
-#     che_version: "6.5.0"
-#     multi_user: true
-#     route_suffix: "{{ apps_hostname_suffix }}"
-#     keycloak_openshift_user: admin
-#     keycloak_admin_pwd: admin
-#     install_java_oc_stack: true
+# deploy eclipse che
+- import_role:
+    name: openshift_eclipse_che
+  vars:
+    project_name: "{{ namespace }}"
+    che_version: "6.6.0"
+    multi_user: true
+    route_suffix: "{{ apps_hostname_suffix }}"
+    keycloak_openshift_user: "{{ infrasvcs_adm_user }}"
+    keycloak_admin_pwd: "{{ infrasvcs_adm_password }}"
+    install_java_oc_stack: true
 
 - name: "Create local repository to push to git (Java version)"
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}.git

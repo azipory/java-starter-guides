@@ -14,6 +14,8 @@
     - gogs
     - nexus
     - starter-guides
+    - che
+    - ocp-ops-view
 
 # Remove users projects
 - name: Delete user projects

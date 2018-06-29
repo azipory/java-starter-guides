@@ -60,7 +60,6 @@ plans:
       type: string
       required: true
       display_type: text
-      default: "r3dh4t1!"
       display_group: Workshop
     - name: openshift_master_url
       title: OpenShift Master URL
@@ -69,19 +68,19 @@ plans:
       required: true
       display_type: text
       display_group: Lab Guide
-    - name: gogs_adm_user
-      title: Gogs Admin User
-      description: Admin user for Gogs Git Server
+    - name: infrasvcs_adm_user
+      title: Infrastructure Services Admin User
+      description: Admin user for infrastructure services (Gogs, Che, ...)
       type: string
-      default: "gogsadmin"
+      default: "adminuser"
       required: true
       display_type: text
-      display_group: Git Server
-    - name: gogs_adm_password
-      title: Gogs Admin Password
-      description: Admin password for Gogs Git Server
+      display_group: Infrastructure Services
+    - name: infrasvcs_adm_password
+      title: Infrastructure Services Admin Password
+      description: Admin password for infrastructure services (Gogs, Che, ...)
       type: string
-      default: "r3dh4t1!"
+      default: "admin123"
       required: true
       display_type: text
-      display_group: Git Server
+      display_group: Infrastructure Services
