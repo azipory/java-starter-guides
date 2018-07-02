@@ -161,7 +161,7 @@
     che_version: "6.6.0"
     multi_user: true
     route_suffix: "{{ apps_hostname_suffix }}"
-    keycloak_openshift_user: "{{ infrasvcs_adm_user }}"
+    keycloak_admin_user: "{{ infrasvcs_adm_user }}"
     keycloak_admin_pwd: "{{ infrasvcs_adm_password }}"
     install_java_oc_stack: true
 
