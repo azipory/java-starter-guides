@@ -1,17 +1,23 @@
-# oc new-project demo
-# oc create serviceaccount apb
-# oc create rolebinding apb --clusterrole=admin --serviceaccount=demo:apb
-oc run starter-provision \
-       --env="POD_NAME=starter-provision" \
-       --env="POD_NAMESPACE=demo" \
-       --image=$(oc get images | grep starter-workshop-apb | awk '{print $2}') \
-       --restart=Never \
-       --attach=true \
-       --serviceaccount=apb  \
-       -- provision -e namespace=demo \
-                    -e cluster=openshift \
-                    -e openshift_user=admin \
-                    -e openshift_password=password \
-                    -e openshift_master_url=10.5.5.5 \
-                    -e user_count_start=1 \
-                    -e user_count=5
+#!/bin/bash
+
+_cluster=${1:-$APB_TEST_ENV_MASTER_URL}
+_user=${2:-$APB_TEST_ENV_ADMIN_USER}
+_password=${3:-$APB_TEST_ENV_ADMIN_PASSWORD}
+_namespace=${4:-starter-workshop-apb-test}
+
+echo "oc login ${_cluster} -u ${_user} -p ${_password}"
+oc login ${_cluster} -u ${_user} -p ${_password}
+oc new-project ${_namespace}
+oc project ${_namespace}
+
+docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount starter-workshop-apb \
+       provision -e namespace=${_namespace} \
+                 -e master_url=${_cluster} \
+                 -e openshift_user=${_user} \
+                 -e openshift_password=${_password} \
+                 -e workshop_type=java \
+                 -e user_count=2 \
+                 -e openshift_user_password=openshift \
+                 -e openshift_master_url=${_cluster} \
+                 -e infrasvcs_adm_user=adminuser \
+                 -e infrasvcs_adm_password=adminpassword 

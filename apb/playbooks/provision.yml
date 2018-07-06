@@ -2,14 +2,6 @@
   hosts: localhost
   gather_facts: false
   connection: local
-  vars:
-    openshift_user:
-    openshift_password:
-    openshift_token:
-    openshift_master_url:
-    openshift_user_password:
-    user_count:
-    workshop_type:
 
   roles:
   - role: ansible.kubernetes-modules

@@ -1,16 +1,17 @@
-# oc new-project demo
-# oc create serviceaccount apb
-# oc create rolebinding apb --clusterrole=admin --serviceaccount=demo:apb
-oc run starter-provision \
-       --env="POD_NAME=starter-provision" \
-       --env="POD_NAMESPACE=demo" \
-       --image=$(oc get images | grep starter-workshop-apb | awk '{print $2}') \
-       --restart=Never \
-       --attach=true \
-       --serviceaccount=apb  \
-       -- deprovision -e namespace=demo \
-                    -e openshift_user=admin \
-                    -e openshift_password=password \
-                    -e user_count_start=1 \
-                    -e user_count=5 \
-                    -e user_format=user%d
+#!/bin/bash
+
+_cluster=${1:-$APB_TEST_ENV_MASTER_URL}
+_user=${2:-$APB_TEST_ENV_ADMIN_USER}
+_password=${3:-$APB_TEST_ENV_ADMIN_PASSWORD}
+_namespace=${4:-starter-workshop-apb-test}
+
+# Connect to the cluster and create the project where the apb will run
+oc login ${_cluster} -u ${_user} -p ${_password}
+
+# Run the apb container
+docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount starter-workshop-apb \
+       deprovision -e namespace=${_namespace} \
+                   -e master_url=${_cluster} \
+                   -e openshift_user=${_user} \
+                   -e openshift_password=${_password} \
+                   -e user_count=2

@@ -62,27 +62,27 @@
 #####
 - name: "Process guides template (for java workshop)"
   template:
-    src: guides-java-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-java.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "java"
 - name: "Process guides template (for python workshop)"
   template:
-    src: guides-python-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-python.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "python"
 - name: "Process guides template (for node.js workshop)"
   template:
-    src: guides-nodejs-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-nodejs.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "node.js"
 - name: "Process guides template (for php workshop)"
   template:
-    src: guides-php-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-php.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "php"
 
 - name: Add guides template to {{ namespace }}
-  command: "oc apply -f {{ tmp_dir.path }}/guides-3_9.yml -n {{ namespace }}"
+  command: "oc apply -f {{ tmp_dir.path }}/guides.yml -n {{ namespace }}"
 
 - name: Create install guide resources
   shell: >
@@ -110,7 +110,7 @@
   vars:
     project_name: "{{ namespace }}"
     gogs_route: "{{ gogs_hostname }}"
-    gogs_image_version: 0.11.34
+    gogs_image_version: "{{ gogs_release_version }}"
     gogs_admin_user: "{{ infrasvcs_adm_user }}"
     gogs_admin_password: "{{ infrasvcs_adm_password }}"
     gogs_user: "developer"
@@ -126,8 +126,10 @@
     name: openshift_sonatype_nexus
   vars:
     project_name: "{{ namespace }}"
-    nexus_image_version: 3.11.0
+    nexus_image_version: "{{ nexus_release_version }}"
     nexus_volume_capacity: 6Gi
+    nexus_admin_user: "{{ infrasvcs_adm_user }}"
+    nexus_admin_password: "{{ infrasvcs_adm_password }}"
   when:
     - workshop_type == "java"
 
@@ -150,6 +152,7 @@
   args:
     chdir: "{{ tmp_dir.path }}"  
 
+
 #####
 # Eclipse che
 #####
@@ -158,7 +161,7 @@
     name: openshift_eclipse_che
   vars:
     project_name: "{{ namespace }}"
-    che_version: "6.6.0"
+    che_version: "{{ che_release_version }}"
     multi_user: true
     route_suffix: "{{ apps_hostname_suffix }}"
     keycloak_admin_user: "{{ infrasvcs_adm_user }}"
