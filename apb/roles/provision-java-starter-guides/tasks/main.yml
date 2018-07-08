@@ -62,27 +62,27 @@
 #####
 - name: "Process guides template (for java workshop)"
   template:
-    src: guides-java-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-java.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "java"
 - name: "Process guides template (for python workshop)"
   template:
-    src: guides-python-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-python.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "python"
 - name: "Process guides template (for node.js workshop)"
   template:
-    src: guides-nodejs-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-nodejs.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "node.js"
 - name: "Process guides template (for php workshop)"
   template:
-    src: guides-php-3_9.yml
-    dest: "{{ tmp_dir.path }}/guides-3_9.yml"
+    src: guides-php.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "php"
 
 - name: Add guides template to {{ namespace }}
-  command: "oc apply -f {{ tmp_dir.path }}/guides-3_9.yml -n {{ namespace }}"
+  command: "oc apply -f {{ tmp_dir.path }}/guides.yml -n {{ namespace }}"
 
 - name: Create install guide resources
   shell: >
@@ -110,9 +110,9 @@
   vars:
     project_name: "{{ namespace }}"
     gogs_route: "{{ gogs_hostname }}"
-    gogs_image_version: 0.11.34
-    gogs_admin_user: "{{ gogs_adm_user }}"
-    gogs_admin_password: "{{ gogs_adm_password }}"
+    gogs_image_version: "{{ gogs_release_version }}"
+    gogs_admin_user: "{{ infrasvcs_adm_user }}"
+    gogs_admin_password: "{{ infrasvcs_adm_password }}"
     gogs_user: "developer"
     gogs_password: "{{ openshift_user_password }}"
     gogs_generate_user_count: "{{ user_count }}"
@@ -126,8 +126,10 @@
     name: openshift_sonatype_nexus
   vars:
     project_name: "{{ namespace }}"
-    nexus_image_version: 3.11.0
+    nexus_image_version: "{{ nexus_release_version }}"
     nexus_volume_capacity: 6Gi
+    nexus_admin_user: "{{ infrasvcs_adm_user }}"
+    nexus_admin_password: "{{ infrasvcs_adm_password }}"
   when:
     - workshop_type == "java"
 
@@ -139,34 +141,32 @@
     src: ocp-ops-view.yml
     dest: "{{ tmp_dir.path }}/ocp-ops-view.yml"
 
-- name: Configure SA kube-ops-view in {{ namespace }}
-  command: "oc create sa kube-ops-view -n {{ namespace }}"
+- name: Add anyuid to SA ocp-ops-view in {{ namespace }}
+  command: "oc adm policy add-scc-to-user anyuid -z ocp-ops-view -n {{ namespace }}"
 
-- name: Add anyuid to SA kube-ops-view in {{ namespace }}
-  command: "oc adm policy add-scc-to-user anyuid -z kube-ops-view -n {{ namespace }}"
+- name: Add cluster-admin role to SA ocp-ops-view in {{ namespace }}
+  command: "oc adm policy add-cluster-role-to-user cluster-admin -z ocp-ops-view -n {{ namespace }}"
 
-- name: Add cluster-admin role to SA kube-ops-view in {{ namespace }}
-  command: "oc adm policy add-cluster-role-to-user cluster-admin -z kube-ops-view -n {{ namespace }}"
-
-- name: Configure SA kube-ops-view in {{ namespace }}
+- name: Configure SA ocp-ops-view in {{ namespace }}
   command: "oc apply -f ocp-ops-view.yml -n {{ namespace }}"
   args:
     chdir: "{{ tmp_dir.path }}"  
 
+
 #####
 # Eclipse che
 #####
-# # deploy eclipse che
-# - import_role:
-#     name: openshift_eclipse_che
-#   vars:
-#     project_name: "{{ namespace }}"
-#     che_version: "6.5.0"
-#     multi_user: true
-#     route_suffix: "{{ apps_hostname_suffix }}"
-#     keycloak_openshift_user: admin
-#     keycloak_admin_pwd: admin
-#     install_java_oc_stack: true
+# deploy eclipse che
+- import_role:
+    name: openshift_eclipse_che
+  vars:
+    project_name: "{{ namespace }}"
+    che_version: "{{ che_release_version }}"
+    multi_user: true
+    route_suffix: "{{ apps_hostname_suffix }}"
+    keycloak_admin_user: "{{ infrasvcs_adm_user }}"
+    keycloak_admin_pwd: "{{ infrasvcs_adm_password }}"
+    install_java_oc_stack: true
 
 - name: "Create local repository to push to git (Java version)"
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}.git

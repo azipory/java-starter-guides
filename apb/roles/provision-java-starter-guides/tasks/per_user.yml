@@ -24,7 +24,7 @@
 #    # Create cluster quota for the user to prevent abuse
 #    - name: Create user Quota definition - clusterresourcequota
 #      shell: >
-#            {{ openshift_cli }} create clusterquota clusterquota-"{{my_user}}"
+#            oc create clusterquota clusterquota-"{{my_user}}"
 #            --project-annotation-selector=openshift.io/requester="{{my_user}}"
 #            --hard requests.cpu="{{quota_requests_cpu}}"
 #            --hard limits.cpu="{{quota_limits_cpu}}"
@@ -45,7 +45,7 @@
 # TODO: Commented until there is a default project template that sets the defaults
 #
 #    - name: Apply user Quota - clusterresourcequota
-#      command: "{{ openshift_cli }} apply -f clusterquota-{{ my_user }}.yml"
+#      command: "oc apply -f clusterquota-{{ my_user }}.yml"
 #      args:
 #        chdir: "{{ git_dir.path }}"
 #      tags: always

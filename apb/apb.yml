@@ -6,7 +6,7 @@ async: optional
 tags:
 - workshop
 metadata:
-  dependencies: ['docker.io/osevg/workshopper:latest','docker.io/openshiftdemos/gogs:0.11.34','quay.io/wkulhanek/etherpad:1.6.5','docker.io/sonatype/nexus3:3.11.0']
+  dependencies: ['docker.io/osevg/workshopper:latest','docker.io/openshiftdemos/gogs:0.11.34','quay.io/wkulhanek/etherpad:1.6.5','docker.io/sonatype/nexus3:3.11.0', 'docker.io/eclipse/che-server:3.7.1', 'docker.io/raffaelespazzoli/ocp-ops-view:latest']
   displayName: "OpenShift Developer Starter Workshop Installer"
   longDescription: |-
     Installs the lab instructions and required components
@@ -15,6 +15,7 @@ metadata:
     - Etherpad
     - Lab Guides
     - Eclipse Che
+    - OCP-OpsView (image by Raffaele Spazzoli)
     for running the Getting starter developing on OpenShift Workshop https://github.com/openshift-labs/starter-guides
   console.openshift.io/iconClass: "pficon pficon-process-automation"
   providerDisplayName: "Red Hat, Inc."
@@ -60,7 +61,6 @@ plans:
       type: string
       required: true
       display_type: text
-      default: "r3dh4t1!"
       display_group: Workshop
     - name: openshift_master_url
       title: OpenShift Master URL
@@ -69,19 +69,19 @@ plans:
       required: true
       display_type: text
       display_group: Lab Guide
-    - name: gogs_adm_user
-      title: Gogs Admin User
-      description: Admin user for Gogs Git Server
+    - name: infrasvcs_adm_user
+      title: Infrastructure Services Admin User
+      description: Admin user for infrastructure services (Gogs, Che, ...)
       type: string
-      default: "gogsadmin"
+      default: "adminuser"
       required: true
       display_type: text
-      display_group: Git Server
-    - name: gogs_adm_password
-      title: Gogs Admin Password
-      description: Admin password for Gogs Git Server
+      display_group: Infrastructure Services
+    - name: infrasvcs_adm_password
+      title: Infrastructure Services Admin Password
+      description: Admin password for infrastructure services (Gogs, Che, ...)
       type: string
-      default: "r3dh4t1!"
+      default: "admin123"
       required: true
       display_type: text
-      display_group: Git Server
+      display_group: Infrastructure Services

@@ -2,19 +2,6 @@
   hosts: localhost
   gather_facts: false
   connection: local
-  vars:
-    openshift_user:
-    openshift_password:
-    openshift_token:
-    openshift_master_url:
-    openshift_user_password:
-    user_count:
-    workshop_type:
-#    user_format: user%d #TODO: This should be a default
-#    gogs_adm_user: gogs #TODO: This should be a default
-#    gogs_dev_user: developer #TODO: This should be a default
-#    gogs_pwd: r3dh4t1! #TODO: This should be a default
-#    reponame: nationalparks #TODO: This should be a default
 
   roles:
   - role: ansible.kubernetes-modules
